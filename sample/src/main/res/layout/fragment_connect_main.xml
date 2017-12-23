@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="Custom Banner"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <com.adchain.view.CustomBanner
+            android:id="@+id/customBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:defaultImageUrl="http://oi63.tinypic.com/rtp6oz.jpg"
+            ads:defaultTargetUrl="https://play.google.com/store/apps/details?id=legal17.videodownloader.new2017"
+            ads:remoteConfigImageUrlKey="custom_banner_img"
+            ads:remoteConfigTargetUrlKey="custom_banner_url" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="Admob Banner"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="Toneshub"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <com.adchain.toneshub.view.BlinkButton
+            android:id="@+id/llGetRingTones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Toneshub"
+            android:textColor="@color/colorAccent"></com.adchain.toneshub.view.BlinkButton>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="Amazon Banner"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/adViewAmazon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

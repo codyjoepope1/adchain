@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Ad Chain Toneshub</string>
+
+    <string name="adchain_toneshub_text">Want to get Most Popular Ringtones?</string>
+    <string name="adchain_toneshub_link">http://app.toneshub.com/?cid=%1$s</string>
+</resources>

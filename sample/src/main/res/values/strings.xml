@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ad Chain Sample</string>
+
+    <string name="flurry_1">Key HERE</string> <!--todo-->
+    <string name="flurry_2">Key HERE</string> <!--todo-->
+    <string name="flurry_m">Key HERE</string> <!--todo-->
+
+    <string name="amazon_1">Key HERE</string> <!--todo-->
+    <string name="amazon_2">Key HERE</string> <!--todo-->
+    <string name="amazon_b">Key HERE</string> <!--todo-->
+
+    <string name="toneshub_id">0000</string> <!--todo-->
+
+    <string name="ogury_ad_unit_id">0000</string> <!--todo-->
+
+    <string name="flurry_api_key">0000</string> <!--todo-->
+</resources>

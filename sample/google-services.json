@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "497600137388",
+    "firebase_url": "https://ad-chain.firebaseio.com",
+    "project_id": "ad-chain",
+    "storage_bucket": "ad-chain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497600137388:android:0fab9bf2caaf5c10",
+        "android_client_info": {
+          "package_name": "com.adchain.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497600137388-4ag4ldlekpisch4nk26t57q45cios4a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgAB4rZUjZhIvuhs0iqlAwUeshtxvwTMI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
