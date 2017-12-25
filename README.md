@@ -1,4 +1,4 @@
-AdChain [![](https://jitpack.io/v/fgustovo/adchain.svg)](https://jitpack.io/#fgustovo/adchain)
+AdChain [![](https://jitpack.io/v/gs.oak/adchain.svg)](https://jitpack.io/#gs.oak/adchain)
 ========
 AdChain helps you to show ads.
 
