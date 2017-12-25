@@ -15,8 +15,8 @@ import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 
 /**
- * Created by a on 19.12.2017.
- *         AdSettings.addTestDevice("1c954c8e4afd92dec43247f1d695d4d0");
+ * Created by Gust on 19.12.2017.
+ * AdSettings.addTestDevice("1c954c8e4afd92dec43247f1d695d4d0");
  */
 public class FacebookAdAdapter extends AdChainAdapter implements InterstitialAdListener {
     private final String adAudienceId;

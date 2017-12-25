@@ -4,15 +4,16 @@ import android.app.Activity;
 
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public abstract class AdChainAdapter implements IAdChain, IAdCallback {
-    private AdChain rootChain;
+    protected AdChain rootChain;
     private IAdChain next;
     private AdConfiguration adConfiguration;
 
     private boolean isClosed;
     private boolean isDisplayed;
+    private boolean timedOut;
 
     public AdChainAdapter(AdConfiguration adConfiguration) {
         this.adConfiguration = adConfiguration;
@@ -33,6 +34,8 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
             if (next != null) {
                 next.startChain();
             } else {
+                rootChain.setNextStepBarrier(true); // stop all other startChain calls
+
                 rootChain.startActivity();
                 rootChain.finishActivity();
 
@@ -51,14 +54,16 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                 if (rootChain.isStepByStepMode() && !rootChain.isLastAd())
                     rootChain.setNextStepBarrier(true);
             } else {
-                log("not loaded yet, let me check again.");
+                if (timedOut)
+                    error("timeout. Ad is cancelled.");
+                else
+                    log("not loaded yet, let me check again.");
             }
         }
     }
 
     public final void timeout() {
-        if (!isClosed && !isDisplayed && !isAdLoaded())
-            error("timeout");
+        timedOut = true;
         if (next != null) {
             next.timeout();
         }
@@ -68,7 +73,11 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         if (!isClosed)
             this.rootChain.increaseDisplayedAdCount();
         isClosed = true;
-        destroy();
+        try {
+            destroy();
+        } catch (Throwable e) {
+            loge(e.getMessage());
+        }
         if (next != null) {
             next.destroyChain();
         }
@@ -119,7 +128,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         this.rootChain.startChain();
     }
 
-    public void setRootChain(AdChain rootChain) {
+    void setRootChain(AdChain rootChain) {
         this.rootChain = rootChain;
     }
 
@@ -139,7 +148,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         return rootChain.getActivity();
     }
 
-    public boolean isLoggingEnabled() {
+    protected boolean isLoggingEnabled() {
         return rootChain.isLoggingEnabled();
     }
 

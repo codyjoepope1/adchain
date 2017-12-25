@@ -11,7 +11,7 @@ import android.widget.Button;
 import com.adchain.config.RemoteConfigHelper;
 
 /**
- * Created by a on 20.12.2017.
+ * Created by Gust on 20.12.2017.
  */
 
 public class ToneshubHelper {

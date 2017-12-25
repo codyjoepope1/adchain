@@ -11,7 +11,7 @@ import io.presage.Presage;
 import io.presage.ads.PresageInterstitial;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public class OguryAdAdapter extends AdChainAdapter {
     private final String apiKey;

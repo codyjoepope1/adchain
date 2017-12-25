@@ -14,7 +14,7 @@ import com.amazon.device.ads.AdProperties;
 import com.amazon.device.ads.AdRegistration;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public class AmazonAdHelper {
 
@@ -70,7 +70,7 @@ public class AmazonAdHelper {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        adContainer.addView(adView,lp);
+        adContainer.addView(adView, lp);
         return adView;
     }
 }

@@ -12,11 +12,11 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import java.util.HashMap;
 
 /**
- * Created by a on 20.12.2017.
+ * Created by Gust on 20.12.2017.
  */
 
 /**
- * Created by a on 10.04.2017.
+ * Created by Gust on 10.04.2017.
  */
 
 public class RemoteConfigHelper implements OnCompleteListener<Void> {

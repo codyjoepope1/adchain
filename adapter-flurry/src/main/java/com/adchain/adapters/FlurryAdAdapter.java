@@ -11,7 +11,7 @@ import com.flurry.android.ads.FlurryAdInterstitialListener;
 import com.flurry.android.ads.FlurryAdTargeting;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  * don't forget to initialize FlurryAgent in Application
  */
 public class FlurryAdAdapter extends AdChainAdapter implements FlurryAdInterstitialListener {

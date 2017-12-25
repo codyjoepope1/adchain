@@ -1,7 +1,6 @@
 package com.adchain.sample;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 

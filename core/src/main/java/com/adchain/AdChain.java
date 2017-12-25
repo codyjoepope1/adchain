@@ -4,15 +4,17 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 
 /**
- * Created by a on 30.01.2017.
- * V 2.0
+ * Created by Gust on 30.01.2017.
  */
 public class AdChain {
-    String TAG = "IAdChain";
+    String TAG = "AdChain";
+
+    private Object startChainLock = new Object();
 
     private Activity context;
     private IAdChain adChain;
@@ -29,6 +31,10 @@ public class AdChain {
     private int totalAdCount;
     private int displayedAdCount;
     private Intent intent;
+
+    private Runnable timeoutRunnable;
+    private Handler timeoutTimer;
+    private long timeout;
 
     AdChain(Activity context) {
         this.context = context;
@@ -53,7 +59,7 @@ public class AdChain {
             return;
         }
 
-        adChain.startChain();
+        startChain();
     }
 
     void startActivity() {
@@ -120,7 +126,9 @@ public class AdChain {
     }
 
     void startChain() {
-        this.adChain.startChain();
+        synchronized (startChainLock) {
+            this.adChain.startChain();
+        }
     }
 
     void reloadChain() {
@@ -160,7 +168,7 @@ public class AdChain {
         this.stepByStepMode = stepByStepMode;
     }
 
-    public boolean isStepByStepMode() {
+    boolean isStepByStepMode() {
         return stepByStepMode;
     }
 
@@ -224,8 +232,43 @@ public class AdChain {
         }
     };
 
-    public void setReloadable(boolean reloadable) {
+    void setReloadable(boolean reloadable) {
         this.reloadable = reloadable;
     }
 
+    void setTimeout(long timeout) {
+        this.timeout = timeout;
+    }
+
+    public long getTimeout() {
+        return this.timeout;
+    }
+
+    void initChain() {
+        log("AdChain init");
+        adChain.initChain();
+        log("AdChain init2");
+        startTimeoutTimer();
+    }
+
+    private void stopTimeoutTimer() {
+        if (timeoutRunnable != null && timeoutTimer != null) {
+            timeoutTimer.removeCallbacks(timeoutRunnable);
+        }
+    }
+
+    private void startTimeoutTimer() {
+        stopTimeoutTimer();
+        if (timeout > 0) {
+            timeoutTimer = new Handler();
+            timeoutRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    adChain.timeout();
+                    startChain();
+                }
+            };
+            timeoutTimer.postDelayed(timeoutRunnable, this.timeout);
+        }
+    }
 }

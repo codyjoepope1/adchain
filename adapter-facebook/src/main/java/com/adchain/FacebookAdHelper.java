@@ -13,9 +13,9 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdsManager;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
-public class FacebookAdHelper  {
+public class FacebookAdHelper {
     /*
     * BANNER AD LOADER
     * */
@@ -74,7 +74,7 @@ public class FacebookAdHelper  {
 
     /**
      * Has no remote config enable feature
-     * */
+     */
     public static NativeAdsManager configureAndLoadNative(Context context, String remoteConfigNativeAdIdKey, final Callback loaded) {
         String nativeAdId = RemoteConfigHelper.getConfigs().getString(remoteConfigNativeAdIdKey);
         return loadNative(context, nativeAdId, loaded);

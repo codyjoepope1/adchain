@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.HashMap;
 
 /**
- * Created by a on 5.05.2017.
+ * Created by Gust on 5.05.2017.
  */
 public class RCUtils {
     private static final String TAG = "RCUtils";

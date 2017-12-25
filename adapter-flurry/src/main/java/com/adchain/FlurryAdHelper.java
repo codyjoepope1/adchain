@@ -10,7 +10,7 @@ import com.flurry.android.ads.FlurryAdBannerListener;
 import com.flurry.android.ads.FlurryAdErrorType;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public class FlurryAdHelper {
     public static FlurryAdBanner checkAndLoadBanner(Context context, LinearLayout mBanner, String remoteConfigEnableKey, String mAdSpaceName) {

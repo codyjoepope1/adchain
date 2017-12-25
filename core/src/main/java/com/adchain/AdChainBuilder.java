@@ -8,12 +8,13 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public final class AdChainBuilder {
     private AdChain adc;
     private boolean autoShow;
     private boolean reloadable;
+    private Long timeoutLimit = 15000L;
 
     public AdChainBuilder(Activity context) {
         adc = new AdChain(context);
@@ -31,7 +32,8 @@ public final class AdChainBuilder {
         if (adc.getAdChain() == null) {
             Log.e(adc.TAG, "No AdChainAdapter found, all might be set as AdConfiguration=false.");
         } else {
-            adc.getAdChain().initChain();
+            adc.setTimeout(timeoutLimit);
+            adc.initChain();
         }
 
         if (autoShow)
@@ -141,6 +143,18 @@ public final class AdChainBuilder {
                 view.setVisibility(View.VISIBLE);
             }
         }, enableDelay);
+        return this;
+    }
+
+
+    /**
+     * in millisecond, default value is 15000.
+     * 0 for no timeout
+     */
+    public AdChainBuilder timeout(long timeoutMili) {
+        if (timeoutMili < 1000)
+            adc.log("The value you enter for timeout is too small. You must enter the time in milliseconds.");
+        this.timeoutLimit = timeoutMili;
         return this;
     }
 }

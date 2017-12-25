@@ -3,7 +3,7 @@ package com.adchain;
 import android.os.Handler;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  */
 public class DummyAdAdapter extends AdChainAdapter {
     private boolean loaded;

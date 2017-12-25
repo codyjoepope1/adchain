@@ -14,7 +14,7 @@ import com.amazon.device.ads.AdRegistration;
 import com.amazon.device.ads.InterstitialAd;
 
 /**
- * Created by a on 19.12.2017.
+ * Created by Gust on 19.12.2017.
  * AdRegistration.enableTesting(true);
  */
 public class AmazonAdAdapter extends AdChainAdapter implements AdListener {
@@ -54,7 +54,8 @@ public class AmazonAdAdapter extends AdChainAdapter implements AdListener {
         AdRegistration.enableLogging(isLoggingEnabled());
         AdRegistration.setAppKey(amazonAppKey);
         ad = new InterstitialAd(getActivity());
-        ad.setTimeout(10000);
+        if (rootChain.getTimeout() > 0)
+            ad.setTimeout((int) rootChain.getTimeout());
         ad.setListener(this);
         ad.loadAd();
     }

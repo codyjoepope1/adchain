@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 /**
- * Created by a on 20.12.2017.
+ * Created by Gust on 20.12.2017.
  */
 public class BlinkButton extends Button {
 

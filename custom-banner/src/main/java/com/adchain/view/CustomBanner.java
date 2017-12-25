@@ -20,7 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 /**
- * Created by a on 20.12.2017.
+ * Created by Gust on 20.12.2017.
  */
 public class CustomBanner extends ImageView {
 
@@ -84,17 +84,12 @@ public class CustomBanner extends ImageView {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         Log.d(TAG, "load failed.", e);
                         setVisibility(View.GONE);
-
-                        if (!TextUtils.isEmpty(defaultImageUrl) && !TextUtils.isEmpty(defaultTargetUrl)) {
-                            if (!imageUrl.equals(defaultImageUrl)) {
-                                loadBanner(defaultImageUrl, defaultTargetUrl);
-                            }
-                        }
                         return true;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        setVisibility(View.VISIBLE);
                         setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
