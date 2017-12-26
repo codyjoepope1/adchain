@@ -52,6 +52,17 @@ public final class AdChainBuilder {
         return this;
     }
 
+    /**
+     * request test ads from platforms if available feature.
+     */
+    public AdChainBuilder testAds(boolean showTestAdsIfAvailable) {
+        if (adc.getAdChain() != null) {
+            Log.e(adc.TAG, "call 'testAds' function before add()");
+        }
+        adc.setShowTestAds(showTestAdsIfAvailable);
+        return this;
+    }
+
 
     public AdChainBuilder setAdChainListener(AdChainListener adChainListener) {
         adc.setAdChainListener(adChainListener);
@@ -66,7 +77,6 @@ public final class AdChainBuilder {
     public AdChainBuilder add(AdChainAdapter nextAdChain) {
         if (nextAdChain != null) {
             nextAdChain.setRootChain(adc);
-//            nextAdChain.init();
             adc.increaseAdCountTotal();
             if (adc.getAdChain() == null)
                 adc.setAdChain(nextAdChain);
@@ -118,6 +128,13 @@ public final class AdChainBuilder {
         return withStepByStep(false);
     }
 
+
+    /**
+     * set views clickListener and shows ads when clicked
+     */
+    public AdChainBuilder showOnClick(int triggerViewId) {
+        return showOnClick(triggerViewId, 2000L);
+    }
 
     /**
      * set views clickListener and shows ads when clicked

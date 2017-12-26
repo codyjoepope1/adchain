@@ -13,6 +13,7 @@ AdChain's unique set of features:
 * Amazon: Interstitial and banner.
 * Flurry: Interstitial and banner.
 * Ogury: Interstitial.
+* AppLovin: Banner.
 * Toneshub: Make button as Toneshub link and feature BlinkButton view.
 
 Add AdChain to your project
@@ -32,8 +33,8 @@ buildscript {
 // In your app projects build.gradle file:
 
 dependencies {
-    compile 'gs.oak.adchain:config:0.1.0' // use only for remote config.
-    compile 'gs.oak.adchain:adapter-admob:0.1.0' // add adapters you want
+    compile 'gs.oak.adchain:config:0.2.0' // use only for remote config.
+    compile 'gs.oak.adchain:adapter-admob:0.2.0' // add adapters you want
 }
 ```
 
@@ -62,7 +63,7 @@ new AdChainBuilder(this)
 
 __More Configurations__
 - showAuto(): It displays ads automatically when they loaded.
-- showOnClick(R.id.button_id, 2000L): Displays ads when button (with id 'button_id') click. It bind listener automatically
+- showOnClick(R.id.button_id): Displays ads when button (with id 'button_id') click. It binds listener automatically
 - withStepByStep(true): Show one ad per calling 'showAds()' function of AdChain object. After all completed, it reload all ads.
 
 [CHANGELOG](CHANGELOG.md)

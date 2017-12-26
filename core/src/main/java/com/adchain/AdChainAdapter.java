@@ -152,4 +152,8 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         return rootChain.isLoggingEnabled();
     }
 
+    protected boolean isShowTestAds() {
+        return rootChain.isShowTestAds();
+    }
+
 }

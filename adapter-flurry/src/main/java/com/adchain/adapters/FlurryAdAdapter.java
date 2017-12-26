@@ -46,7 +46,7 @@ public class FlurryAdAdapter extends AdChainAdapter implements FlurryAdInterstit
         mFlurryAdInterstitial.setListener(this);
 
         FlurryAdTargeting adTargeting = new FlurryAdTargeting();
-        adTargeting.setEnableTestAds(isLoggingEnabled());
+        adTargeting.setEnableTestAds(isShowTestAds());
         mFlurryAdInterstitial.setTargeting(adTargeting);
         mFlurryAdInterstitial.fetchAd();
     }

@@ -27,6 +27,7 @@ public class AdChain {
     private AdChainListener adChainListener;
 
     private boolean loggingEnabled;
+    private boolean showTestAds;
 
     private int totalAdCount;
     private int displayedAdCount;
@@ -187,7 +188,13 @@ public class AdChain {
     boolean isLoggingEnabled() {
         return this.loggingEnabled;
     }
+    boolean isShowTestAds() {
+        return this.showTestAds;
+    }
 
+    void setShowTestAds(boolean showTestAds) {
+        this.showTestAds = showTestAds;
+    }
     private final Application.ActivityLifecycleCallbacks LIFECYCLE_CALLBACKS = new Application.ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle bundle) {

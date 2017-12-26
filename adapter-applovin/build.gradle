@@ -3,7 +3,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.fgustovo.adchain'
 
-
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.2"
@@ -31,5 +30,5 @@ dependencies {
 
     compile project(path: ':core')
 
-    compile 'com.facebook.android:audience-network-sdk:4.27.0'
+    compile 'com.applovin:applovin-sdk:7.6.2'
 }
