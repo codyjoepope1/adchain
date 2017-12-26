@@ -2,6 +2,7 @@ package com.adchain;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,9 +18,12 @@ import com.google.android.gms.ads.NativeExpressAdView;
  * Created by Gust on 19.12.2017.
  */
 public class AdmobAdHelper {
+
+    public static final String TAG = "AdmobAdHelper";
+
     /*
-    * BANNER
-    * */
+            * BANNER
+            * */
     public static void checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey, String adUnitId) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
         loadBanner(context, adContainer, adUnitId, enable);
@@ -53,6 +57,7 @@ public class AdmobAdHelper {
             @Override
             public void onAdFailedToLoad(int i) {
                 container.setVisibility(View.GONE);
+                Log.e(TAG, "onAdFailedToLoad: " + i);
             }
 
             @Override

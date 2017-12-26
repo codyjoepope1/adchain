@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.1] - 2017-12-26
+### Fixed
+- Amazon:  registerApp is calling for each request now.
+- Amazon:  banner layout bug fix.
+- All Ad Helpers: errors will log in console.
+
 ## [0.2.0] - 2017-12-26
 ### Added
 - Requesting test ads feature.

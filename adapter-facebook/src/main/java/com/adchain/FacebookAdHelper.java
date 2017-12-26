@@ -1,6 +1,7 @@
 package com.adchain;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,6 +17,7 @@ import com.facebook.ads.NativeAdsManager;
  * Created by Gust on 19.12.2017.
  */
 public class FacebookAdHelper {
+    public static final String TAG = "FacebookAdHelper";
     /*
     * BANNER AD LOADER
     * */
@@ -45,6 +47,7 @@ public class FacebookAdHelper {
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
+                Log.e(TAG, "onError: " + adError.getErrorCode() + ":"+ adError.getErrorMessage());
                 adContainer.setVisibility(View.GONE);
             }
 

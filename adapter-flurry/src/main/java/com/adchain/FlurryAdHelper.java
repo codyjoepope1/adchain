@@ -1,6 +1,7 @@
 package com.adchain;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,6 +14,9 @@ import com.flurry.android.ads.FlurryAdErrorType;
  * Created by Gust on 19.12.2017.
  */
 public class FlurryAdHelper {
+
+    public static final String TAG = "FlurryAdHelper";
+
     public static FlurryAdBanner checkAndLoadBanner(Context context, LinearLayout mBanner, String remoteConfigEnableKey, String mAdSpaceName) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
         return loadBanner(context, mAdSpaceName, mBanner, enable);
@@ -76,6 +80,8 @@ public class FlurryAdHelper {
             @Override
             public void onError(FlurryAdBanner flurryAdBanner, FlurryAdErrorType flurryAdErrorType, int i) {
                 mBanner.setVisibility(View.GONE);
+                Log.e(TAG, "onError: " + i + ":" + flurryAdErrorType.name());
+
             }
         });
         return mFlurryAdBanner;

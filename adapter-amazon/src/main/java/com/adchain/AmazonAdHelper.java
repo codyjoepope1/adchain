@@ -2,6 +2,7 @@ package com.adchain;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,6 +18,8 @@ import com.amazon.device.ads.AdRegistration;
  * Created by Gust on 19.12.2017.
  */
 public class AmazonAdHelper {
+
+    public static final String TAG = "AmazonAdHelper";
 
     public static AdLayout checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey, String appKey) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
@@ -38,6 +41,7 @@ public class AmazonAdHelper {
         AdRegistration.setAppKey(appKey);
 
         final AdLayout adView = new AdLayout(context);
+        adView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         adView.enableAutoShow();
         adView.setListener(new AdListener() {
             @Override
@@ -47,6 +51,7 @@ public class AmazonAdHelper {
 
             @Override
             public void onAdFailedToLoad(Ad ad, AdError adError) {
+                Log.e(TAG, "onAdFailedToLoad: " + adError.getCode().name() + "."+ adError.getMessage());
                 adContainer.setVisibility(View.GONE);
             }
 

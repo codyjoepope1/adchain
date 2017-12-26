@@ -45,27 +45,12 @@ public class AppLovinAdHelper {
         adView.setAdLoadListener(new AppLovinAdLoadListener() {
             @Override
             public void adReceived(AppLovinAd appLovinAd) {
-                Log.e(TAG, "adReceived");
-
             }
 
             @Override
             public void failedToReceiveAd(int i) {
                 Log.e(TAG, "failedToReceiveAd" + i);
-
-            }
-        });
-        adView.setAdDisplayListener(new AppLovinAdDisplayListener() {
-            @Override
-            public void adDisplayed(AppLovinAd appLovinAd) {
-                Log.e(TAG, "adDisplayed");
-
-            }
-
-            @Override
-            public void adHidden(AppLovinAd appLovinAd) {
-                Log.e(TAG, "adHidden");
-
+                bannerContainer.setVisibility(View.GONE);
             }
         });
         adView.loadNextAd();
