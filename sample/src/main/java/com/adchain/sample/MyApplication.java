@@ -20,7 +20,6 @@ public class MyApplication extends MultiDexApplication {
 
          new FlurryAgent.Builder()
                 .withLogEnabled(true)
-                .withListener(this)
                 .build(this, getString(R.string.flurry_api_key));
 
         RemoteConfigHelper.init(RCUtils.getDefaults(), BuildConfig.DEBUG);
