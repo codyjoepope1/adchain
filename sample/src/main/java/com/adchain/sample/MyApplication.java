@@ -18,8 +18,10 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         FirebaseApp.initializeApp(getApplicationContext());
 
-        FlurryAgent.setLogEnabled(false);
-        FlurryAgent.init(this, getString(R.string.flurry_api_key));
+         new FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .withListener(this)
+                .build(this, getString(R.string.flurry_api_key));
 
         RemoteConfigHelper.init(RCUtils.getDefaults(), BuildConfig.DEBUG);
     }
