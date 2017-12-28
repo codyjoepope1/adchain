@@ -25,6 +25,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash_screen);
 
+        RemoteConfigHelper.init(RCUtils.getDefaults(), BuildConfig.DEBUG);
+
         final boolean adsEnabled = true; // if user purchased some ads remove package, set false.
         RemoteConfigHelper.setAdsEnabled(adsEnabled);
 

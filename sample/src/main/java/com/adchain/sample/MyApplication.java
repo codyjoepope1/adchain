@@ -22,7 +22,6 @@ public class MyApplication extends MultiDexApplication {
                 .withLogEnabled(true)
                 .build(this, getString(R.string.flurry_api_key));
 
-        RemoteConfigHelper.init(RCUtils.getDefaults(), BuildConfig.DEBUG);
     }
 
     @Override
