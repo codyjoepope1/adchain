@@ -8,7 +8,7 @@ AdChain's unique set of features:
 
 * RemoteConfigHelper: Helper class for remote configs.
 * Custom Banner: Helps you to show custom banners via remote config urls.
-* Admob: Interstitial, banner and native.
+* Admob: Interstitial and banner.
 * Facebook: Interstitial, banner and native.
 * Amazon: Interstitial and banner.
 * Flurry: Interstitial and banner.
@@ -33,8 +33,8 @@ buildscript {
 // In your app projects build.gradle file:
 
 dependencies {
-    compile 'gs.oak.adchain:config:0.2.1' // use only for remote config.
-    compile 'gs.oak.adchain:adapter-admob:0.2.1' // add adapters you want
+    compile 'gs.oak.adchain:config:0.3.0' // use only for remote config.
+    compile 'gs.oak.adchain:adapter-admob:0.3.0' // add adapters you want
 }
 ```
 

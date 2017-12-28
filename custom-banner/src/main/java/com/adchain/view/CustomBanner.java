@@ -116,6 +116,18 @@ public class CustomBanner extends ImageView {
             if (adListener != null) {
                 adListener.onClick(url);
             }
+            if (url.contains("play.google.com/store/apps/")) {
+                try {
+                    url = url.replace("http://play.google.com/store/apps/", "market://");
+                    url = url.replace("https://play.google.com/store/apps/", "market://");
+                    Uri uri = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    c.startActivity(intent);
+                    return;
+                } catch (Exception e) {
+                    Log.e(TAG, "couldn't open url in Play store app");
+                }
+            }
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             c.startActivity(intent);

@@ -36,6 +36,9 @@ public class ToneshubHelper {
             button.setVisibility(View.GONE);
             return;
         }
+        if (button==null || TextUtils.isEmpty(toneshubId)) {
+            return;
+        }
         button.setVisibility(View.VISIBLE);
 
         if (TextUtils.isEmpty(button.getText())) {

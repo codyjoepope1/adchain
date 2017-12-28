@@ -104,6 +104,9 @@ public class AdChain {
     void increaseAdCountTotal() {
         this.totalAdCount++;
     }
+    long getAdCountTotal() {
+        return this.totalAdCount;
+    }
 
     void increaseDisplayedAdCount() {
         this.displayedAdCount++;

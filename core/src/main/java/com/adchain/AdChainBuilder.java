@@ -82,6 +82,9 @@ public final class AdChainBuilder {
                 adc.setAdChain(nextAdChain);
             else
                 adc.getAdChain().setNextAd(nextAdChain);
+        } else {
+            long order = adc.getAdCountTotal();
+            adc.loge("Empty adapter/empty ad id detected (Order: " + order + "). Ad couldn't add to chain. Maybe you miss to define Remote Config value.");
         }
         return this;
     }

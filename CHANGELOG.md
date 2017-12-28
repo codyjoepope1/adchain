@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.0] - 2017-12-28
+### Removed
+- Admob: native.
+
+### Fixed
+- CustomBanner: Try to open url in Play Store App first.
+
 ## [0.2.1] - 2017-12-26
 ### Fixed
 - Amazon:  registerApp is calling for each request now.

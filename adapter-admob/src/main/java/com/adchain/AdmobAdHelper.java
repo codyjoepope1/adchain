@@ -68,21 +68,4 @@ public class AdmobAdHelper {
         mAdView.loadAd(adRequest);
         container.addView(mAdView);
     }
-
-    /*
-    * NATIVE
-    * */
-    public static View loadNative(Context context, String adUnitId) {
-        NativeExpressAdView nativeAd = new NativeExpressAdView(context);
-        nativeAd.setAdSize(AdSize.LARGE_BANNER);
-        nativeAd.setAdUnitId(adUnitId);
-
-        MobileAds.initialize(context, nativeAd.getAdUnitId());
-
-        AdRequest.Builder builder = new AdRequest.Builder();
-        AdRequest adRequest = builder.build();
-
-        nativeAd.loadAd(adRequest);
-        return nativeAd;
-    }
 }
