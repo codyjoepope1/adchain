@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-01-08
+### Fixed
+- Gradle: compiling error fixed
+
 ## [0.3.0] - 2017-12-28
 ### Removed
 - Admob: native.

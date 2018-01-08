@@ -33,3 +33,12 @@ dependencies {
     //amazon-ads
     compile 'com.amazon.android:mobile-ads:5.8.1.1'
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}

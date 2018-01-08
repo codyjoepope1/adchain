@@ -33,3 +33,12 @@ dependencies {
 
     compile 'com.facebook.android:audience-network-sdk:4.27.0'
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}

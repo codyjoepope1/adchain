@@ -34,3 +34,12 @@ dependencies {
     //ogury
     compile files('libs/presage-lib-2.2.7-obfuscated.jar')
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}

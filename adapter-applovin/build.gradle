@@ -32,3 +32,12 @@ dependencies {
 
     compile 'com.applovin:applovin-sdk:7.6.2'
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}

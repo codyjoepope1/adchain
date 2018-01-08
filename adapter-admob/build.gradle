@@ -34,3 +34,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:11.8.0'
 
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
