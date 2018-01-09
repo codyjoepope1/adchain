@@ -54,6 +54,9 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                 if (rootChain.isStepByStepMode() && !rootChain.isLastAd())
                     rootChain.setNextStepBarrier(true);
             } else {
+                if (rootChain.isStepByStepMode()) {
+                    timedOut = true;
+                }
                 if (timedOut)
                     error("timeout. Ad is cancelled.");
                 else

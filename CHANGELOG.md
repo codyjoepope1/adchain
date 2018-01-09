@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.4.1] - 2018-01-09
+### Fixed
+- StepByStep Mode: Don't show ads if has not been loaded yet when showAds() called.
+
 ## [0.4.0] - 2018-01-08
 ### Fixed
 - Gradle: compiling error fixed

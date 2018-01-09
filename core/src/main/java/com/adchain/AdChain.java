@@ -137,6 +137,7 @@ public class AdChain {
 
     void reloadChain() {
         if (reloadable) {
+            log("Reloading all ads.");
             nextStepBarrier = true; // run only step by step mode now.
             adChain.destroyChain();
             displayedAdCount = 0;
