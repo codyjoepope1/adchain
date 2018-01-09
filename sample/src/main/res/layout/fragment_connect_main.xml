@@ -21,8 +21,6 @@
             android:id="@+id/customBanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ads:defaultImageUrl="http://oi63.tinypic.com/rtp6oz.jpg"
-            ads:defaultTargetUrl="https://play.google.com/store/apps/details?id=legal17.videodownloader.new2017"
             ads:remoteConfigImageUrlKey="custom_banner_img"
             ads:remoteConfigTargetUrlKey="custom_banner_url" />
 
