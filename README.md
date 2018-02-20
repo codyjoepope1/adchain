@@ -38,9 +38,9 @@ dependencies {
 }
 ```
 
-Init remote config in Application class
+Init remote config in onCreate of each Activity class
 ```groovy
-// In your Application class:
+// In onCreate of Activites  class:
 HashMap<String, Object> defaults = new HashMap<>();
 defaults.put("show_splash1", true);
 defaults.put("show_splash2", true);
@@ -48,8 +48,6 @@ defaults.put("show_splash2", true);
 RemoteConfigHelper.init(defaults);
 ```
 
-
-Init remote config in Application class
 ```groovy
 // In your Activity class:
 new AdChainBuilder(this)
