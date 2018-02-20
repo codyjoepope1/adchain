@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.0] - 2018-02-20
+### Fixed
+- Flurry SDK: upgraded 9.0.0 version
+
 ## [0.4.1] - 2018-01-09
 ### Fixed
 - StepByStep Mode: Don't show ads if has not been loaded yet when showAds() called.

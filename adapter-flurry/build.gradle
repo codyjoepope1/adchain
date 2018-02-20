@@ -32,8 +32,8 @@ dependencies {
     compile project(path: ':core')
 
     //Flurry
-    compile 'com.flurry.android:analytics:8.2.0@aar'
-    compile 'com.flurry.android:ads:8.2.0@aar'
+    compile 'com.flurry.android:analytics:9.0.0@aar'
+    compile 'com.flurry.android:ads:9.0.0@aar'
 }
 
 task sourcesJar(type: Jar) {
