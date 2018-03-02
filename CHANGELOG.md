@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.1] - 2018-03-02
+### Fixed
+- Admob SDK: Theme of activity is changed in Manifest.
+
 ## [0.5.0] - 2018-02-20
 ### Fixed
 - Flurry SDK: upgraded 9.0.0 version
