@@ -34,8 +34,8 @@ buildscript {
 // In your app projects build.gradle file:
 
 dependencies {
-    compile 'gs.oak.adchain:config:0.6.0' // use only for remote config.
-    compile 'gs.oak.adchain:adapter-admob:0.6.0' // add adapters you want
+    compile 'gs.oak.adchain:config:0.6.1' // use only for remote config.
+    compile 'gs.oak.adchain:adapter-admob:0.6.1' // add adapters you want
 }
 ```
 
