@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.6.0] - 2018-03-30
+### Added
+- Unity support.
+
 ## [0.5.1] - 2018-03-02
 ### Fixed
 - Admob SDK: Theme of activity is changed in Manifest.
