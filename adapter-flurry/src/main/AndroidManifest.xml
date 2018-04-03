@@ -1,13 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.adchain.adapters.flurry">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.adchain.adapters.flurry">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-        <!--flurry-->
-        <activity
+
+        <activity tools:replace="android:theme"
             android:name="com.flurry.android.FlurryFullscreenTakeoverActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <!--API27 bug fix: special thanks to neman :)-->
 
     </application>
 
