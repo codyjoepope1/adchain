@@ -17,7 +17,7 @@ AdChain's unique set of features:
 * AppLovin: Banner.
 * Toneshub: Make button as Toneshub link and feature BlinkButton view.
 
-Add AdChain to your project
+Add AdChain to your project:
 ----------------------------
 AdChain is available on Jitpack. Please ensure that you are using the latest versions by [checking here](https://jitpack.io/#gs.oak/adchain)
 
