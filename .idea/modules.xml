@@ -4,14 +4,27 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AdChain.iml" filepath="$PROJECT_DIR$/AdChain.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapter-admob/adapter-admob.iml" filepath="$PROJECT_DIR$/adapter-admob/adapter-admob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-admob/adapter-admob.iml" filepath="$PROJECT_DIR$/adapter-admob/adapter-admob.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapter-amazon/adapter-amazon.iml" filepath="$PROJECT_DIR$/adapter-amazon/adapter-amazon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-amazon/adapter-amazon.iml" filepath="$PROJECT_DIR$/adapter-amazon/adapter-amazon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-applovin/adapter-applovin.iml" filepath="$PROJECT_DIR$/adapter-applovin/adapter-applovin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-facebook/adapter-facebook.iml" filepath="$PROJECT_DIR$/adapter-facebook/adapter-facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapter-facebook/adapter-facebook.iml" filepath="$PROJECT_DIR$/adapter-facebook/adapter-facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapter-flurry/adapter-flurry.iml" filepath="$PROJECT_DIR$/adapter-flurry/adapter-flurry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-flurry/adapter-flurry.iml" filepath="$PROJECT_DIR$/adapter-flurry/adapter-flurry.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapter-ogury/adapter-ogury.iml" filepath="$PROJECT_DIR$/adapter-ogury/adapter-ogury.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-ogury/adapter-ogury.iml" filepath="$PROJECT_DIR$/adapter-ogury/adapter-ogury.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter-unity/adapter-unity.iml" filepath="$PROJECT_DIR$/adapter-unity/adapter-unity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adchain.iml" filepath="$PROJECT_DIR$/adchain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
       <module fileurl="file://$PROJECT_DIR$/config/config.iml" filepath="$PROJECT_DIR$/config/config.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/custom-banner/custom-banner.iml" filepath="$PROJECT_DIR$/custom-banner/custom-banner.iml" />
       <module fileurl="file://$PROJECT_DIR$/custom-banner/custom-banner.iml" filepath="$PROJECT_DIR$/custom-banner/custom-banner.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/toneshub/toneshub.iml" filepath="$PROJECT_DIR$/toneshub/toneshub.iml" />
       <module fileurl="file://$PROJECT_DIR$/toneshub/toneshub.iml" filepath="$PROJECT_DIR$/toneshub/toneshub.iml" />
     </modules>
   </component>
