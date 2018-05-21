@@ -5,7 +5,6 @@ group = 'com.github.fgustovo.adchain'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.2"
 
     defaultConfig {
         minSdkVersion 16
@@ -25,13 +24,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.0.2'
-
-    compile project(path: ':core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    api project(path: ':core')
 
     //amazon-ads
-    compile 'com.amazon.android:mobile-ads:5.8.1.1'
+    api 'com.amazon.android:mobile-ads:5.8.1.1'
 }
 
 task sourcesJar(type: Jar) {
