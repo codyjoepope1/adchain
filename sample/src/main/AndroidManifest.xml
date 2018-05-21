@@ -41,7 +41,7 @@
             android:allowTaskReparenting="true"
             android:theme="@style/AppTheme.NoActionBar.Main"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
+
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustResize"></activity>
 

@@ -1,6 +1,7 @@
 package com.adchain.sample;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
