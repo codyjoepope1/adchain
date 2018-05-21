@@ -25,11 +25,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:support-media-compat:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:appcompat-v7:27.1.1'
+    api'com.android.support:recyclerview-v7:27.1.1'
+    api'com.android.support:support-media-compat:27.1.1'
+    api'com.android.support:support-v4:27.1.1'
     api project(path: ':core')
 
     api 'com.facebook.android:audience-network-sdk:4.28.1'

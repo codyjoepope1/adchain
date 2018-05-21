@@ -22,7 +22,11 @@ android {
     }
 }
 
-
+repositories {
+    flatDir{
+        dirs project(':adapter-ogury').file('libs')
+    }
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
