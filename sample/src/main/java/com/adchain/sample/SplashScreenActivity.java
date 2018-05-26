@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.adchain.AdChainBuilder;
+import com.adchain.TestAdAdapter;
 import com.adchain.adapters.AdmobAdAdapter;
 import com.adchain.adapters.AmazonAdAdapter;
 import com.adchain.adapters.FlurryAdAdapter;
@@ -35,6 +36,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .add(AdmobAdAdapter.configureAndCreate(RCUtils.SHOW_ADMOB_1, RCUtils.ID_ADMOB_1))
                 .add(FlurryAdAdapter.checkAndCreate(RCUtils.SHOW_FLURRY_1, getString(R.string.flurry_1)))
                 .add(AmazonAdAdapter.checkAndCreate(RCUtils.SHOW_AMAZON_1, getString(R.string.amazon_1)))
+//                .add(TestAdAdapter.create(" AD1 ", 100))
+//                .add(TestAdAdapter.create(" AD2 ", 7000))
+//                .add(TestAdAdapter.error(" AD3(E) ", 2000))
                 .startActivityAfterAdsFinished(SplashScreenActivityTerm.class)
                 .build();
 
