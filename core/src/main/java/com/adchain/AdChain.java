@@ -5,7 +5,11 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.MainThread;
+import android.support.annotation.WorkerThread;
 import android.util.Log;
+
+import com.adchain.utils.AppExecutors;
 
 
 /**
@@ -15,6 +19,7 @@ public class AdChain {
     String TAG = "AdChain";
 
     private Object startChainLock = new Object();
+    AppExecutors appExecutors = new AppExecutors();
 
     private Activity context;
     private IAdChain adChain;
@@ -49,31 +54,40 @@ public class AdChain {
     }
 
 
+    @MainThread
     public void showAds() {
         log("starting Ad Chain");
-        nextStepBarrier = false;
+        appExecutors.networkIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                nextStepBarrier = false;
 
-        if (adChain == null) {
-            startActivity();
-            finishActivity();
-            triggerAdChainListener();
-            return;
-        }
+                if (adChain == null) {
+                    startActivity();
+                    finishActivity();
+                    triggerAdChainListener();
+                    return;
+                }
 
-        startChain();
+                startChain();
+
+            }
+        });
     }
 
+    @WorkerThread
     void startActivity() {
         if (!penultimateAdClosed && !reloadable) {
             penultimateAdClosed = true;
 
             if (intent != null) {
                 logv("starting next activity");
-                getActivity().startActivity(intent);
+                getActivity().startActivity(intent); // todo
             }
         }
     }
 
+    @WorkerThread
     void finishActivity() {
         if (intent != null && !reloadable) {
             logv("finishing current activity");
@@ -95,9 +109,15 @@ public class AdChain {
             Log.v(TAG, message);
     }
 
+    @WorkerThread
     void triggerAdChainListener() {
         if (this.adChainListener != null) {
-            this.adChainListener.adCompleted(displayedAdCount, totalAdCount, isLastAd());
+            appExecutors.mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    AdChain.this.adChainListener.adCompleted(displayedAdCount, totalAdCount, isLastAd());
+                }
+            });
         }
     }
 
@@ -129,12 +149,14 @@ public class AdChain {
         this.adChainListener = adChainListener;
     }
 
+    @WorkerThread
     void startChain() {
         synchronized (startChainLock) {
             this.adChain.startChain();
         }
     }
 
+    @WorkerThread
     void reloadChain() {
         if (reloadable) {
             log("Reloading all ads.");

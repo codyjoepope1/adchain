@@ -1,6 +1,7 @@
 package com.adchain;
 
 import android.app.Activity;
+import android.support.annotation.MainThread;
 
 
 /**
@@ -14,6 +15,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
     private boolean isClosed;
     private boolean isDisplayed;
     private boolean timedOut;
+    private boolean loaded;
 
     public AdChainAdapter(AdConfiguration adConfiguration) {
         this.adConfiguration = adConfiguration;
@@ -45,11 +47,20 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
             if (isDisplayed)
                 return;
 
-            if (isAdLoaded()) {
+            if (loaded) {
                 log("displaying");
                 this.rootChain.increaseDisplayedAdCount();
                 isDisplayed = true;
-                showAd();
+                rootChain.appExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isAdLoaded()) {
+                            showAd();
+                        }else {
+                            loge("triggered loaded but not loaded");
+                        }
+                    }
+                });
 
                 if (rootChain.isStepByStepMode() && !rootChain.isLastAd())
                     rootChain.setNextStepBarrier(true);
@@ -85,7 +96,12 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
             this.rootChain.increaseDisplayedAdCount();
         isClosed = true;
         try {
-            destroy();
+            rootChain.appExecutors.mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    destroy();
+                }
+            });
         } catch (Throwable e) {
             loge(e.getMessage());
         }
@@ -98,46 +114,76 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
     public final void initChain() {
         isClosed = false;
         isDisplayed = false;
-        init();
+        rootChain.appExecutors.mainThread().execute(new Runnable() {
+            @Override
+            public void run() {
+                init();
+            }
+        });
         if (next != null) {
             next.initChain();
         }
     }
 
 
+    @MainThread
     public final void loaded() {
         if (this.isClosed)
             return;
-        log("loaded");
-        if (this.adConfiguration != null && !this.adConfiguration.showAd()) {
-            log("will not shown (It is disabled from configuration).");
-            isClosed = true;
-            this.rootChain.increaseDisplayedAdCount();
-        }
 
-        this.rootChain.startChain();
+        this.loaded = true;
+
+        rootChain.appExecutors.networkIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                log("loaded");
+                if (adConfiguration != null && !adConfiguration.showAd()) {
+                    log("will not shown (It is disabled from configuration).");
+                    isClosed = true;
+                    rootChain.increaseDisplayedAdCount();
+                }
+                rootChain.startChain();
+            }
+        });
     }
 
-    public final void error(String message) {
+    @MainThread
+    public final void error(final String message) {
         if (this.isClosed)
             return;
-        loge("error: " + (message == null ? "" : message));
+        this.loaded = false;
 
-        this.timedOut = true;
-        this.isClosed = true;
+        rootChain.appExecutors.networkIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                loge("error: " + (message == null ? "" : message));
+
+                timedOut = true;
+                isClosed = true;
 //        this.rootChain.increaseDisplayedAdCount();
-        this.rootChain.triggerAdChainListener();
-        this.rootChain.startChain();
+                rootChain.triggerAdChainListener();
+                rootChain.startChain();
+            }
+        });
+
     }
 
+    @MainThread
     public final void closed() {
         if (this.isClosed)
             return;
-        log("closed");
+        this.loaded = false;
 
-        isClosed = true;
-        this.rootChain.triggerAdChainListener();
-        this.rootChain.startChain();
+        rootChain.appExecutors.networkIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                log("closed");
+                isClosed = true;
+
+                rootChain.triggerAdChainListener();
+                rootChain.startChain();
+            }
+        });
     }
 
     void setRootChain(AdChain rootChain) {
