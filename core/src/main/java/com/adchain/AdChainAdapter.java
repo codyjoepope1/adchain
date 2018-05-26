@@ -57,9 +57,17 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                 if (rootChain.isStepByStepMode()) {
                     timedOut = true;
                 }
-                if (timedOut)
-                    error("timeout. Ad is cancelled.");
-                else
+                if (timedOut) {
+                    boolean realTimeout = !this.isClosed; // real timeout or error event
+                    this.isClosed = true;
+
+                    this.rootChain.increaseDisplayedAdCount();
+                    if (realTimeout) {
+                        loge("timeout. Ad is cancelled."); // real timeout
+                        this.rootChain.triggerAdChainListener();
+                    }
+                    this.rootChain.startChain();
+                } else
                     log("not loaded yet, let me check again.");
             }
         }
@@ -115,8 +123,9 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
             return;
         loge("error: " + (message == null ? "" : message));
 
+        this.timedOut = true;
         this.isClosed = true;
-        this.rootChain.increaseDisplayedAdCount();
+//        this.rootChain.increaseDisplayedAdCount();
         this.rootChain.triggerAdChainListener();
         this.rootChain.startChain();
     }
@@ -136,15 +145,22 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
     }
 
     public void log(String message) {
-        rootChain.log(getClass().getSimpleName() + " " + message);
+        rootChain.log(getClass().getSimpleName() + getExtra() + " " + message);
     }
 
     public void loge(String message) {
-        rootChain.loge(getClass().getSimpleName() + " " + message);
+        rootChain.loge(getClass().getSimpleName() + getExtra() + " " + message);
     }
 
     public void logv(String message) {
-        rootChain.logv(getClass().getSimpleName() + " " + message);
+        rootChain.logv(getClass().getSimpleName() + getExtra() + " " + message);
+    }
+
+    private String getExtra() {
+        if (this instanceof TestAdAdapter) {
+            return ((TestAdAdapter) this).name;
+        }
+        return "";
     }
 
     public Activity getActivity() {
