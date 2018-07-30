@@ -14,7 +14,8 @@ AdChain's unique set of features:
 * Flurry: Interstitial and banner.
 * Ogury: Interstitial.
 * Unity: Interstitial.
-* AppLovin: Banner.
+* AppLovin: Interstitial and Banner
+* Startapp: Interstitial and Banner
 * Toneshub: Make button as Toneshub link and feature BlinkButton view.
 
 Add AdChain to your project:
@@ -34,8 +35,8 @@ buildscript {
 // In your app projects build.gradle file:
 
 dependencies {
-    compile 'gs.oak.adchain:config:0.6.6' // use only for remote config.
-    compile 'gs.oak.adchain:adapter-admob:0.6.6' // add adapters you want
+    compile 'gs.oak.adchain:config:0.7.2' // use only for remote config.
+    compile 'gs.oak.adchain:adapter-admob:0.7.2' // add adapters you want
 }
 ```
 
