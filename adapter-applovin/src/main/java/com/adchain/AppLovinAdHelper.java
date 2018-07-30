@@ -44,6 +44,7 @@ public class AppLovinAdHelper {
         adView.setAdLoadListener(new AppLovinAdLoadListener() {
             @Override
             public void adReceived(AppLovinAd appLovinAd) {
+                Log.e(TAG, "adReceived" );
             }
 
             @Override

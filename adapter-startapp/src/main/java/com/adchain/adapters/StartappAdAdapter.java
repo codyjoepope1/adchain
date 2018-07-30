@@ -9,9 +9,10 @@ import com.startapp.android.publish.adsCommon.Ad;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 import com.startapp.android.publish.adsCommon.VideoListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
 import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
-public class StartappAdAdapter extends AdChainAdapter implements VideoListener, AdEventListener {
+public class StartappAdAdapter extends AdChainAdapter implements VideoListener, AdDisplayListener, AdEventListener {
     private final String appId;
     private StartAppAd startAppAd = null;
 
@@ -40,6 +41,7 @@ public class StartappAdAdapter extends AdChainAdapter implements VideoListener, 
     @Override
     public void init() {
         if (startAppAd == null) {
+            StartAppAd.disableSplash();
             StartAppSDK.init(getActivity(), this.appId, true);
         }
 
@@ -55,7 +57,7 @@ public class StartappAdAdapter extends AdChainAdapter implements VideoListener, 
 
     @Override
     public void showAd() {
-        startAppAd.showAd();
+        startAppAd.showAd(this);
     }
 
 
@@ -69,7 +71,6 @@ public class StartappAdAdapter extends AdChainAdapter implements VideoListener, 
     public void onVideoCompleted() {
         logv("onVideoCompleted");
         closed();
-
     }
 
     @Override
@@ -83,5 +84,27 @@ public class StartappAdAdapter extends AdChainAdapter implements VideoListener, 
         logv("onFailedToReceiveAd");
         error(ad.getErrorMessage());
 
+    }
+
+    @Override
+    public void adHidden(Ad ad) {
+        logv("adHidden");
+        closed();
+    }
+
+    @Override
+    public void adDisplayed(Ad ad) {
+        logv("adDisplayed");
+    }
+
+    @Override
+    public void adClicked(Ad ad) {
+        logv("adClicked");
+    }
+
+    @Override
+    public void adNotDisplayed(Ad ad) {
+        logv("adNotDisplayed");
+        closed();
     }
 }
