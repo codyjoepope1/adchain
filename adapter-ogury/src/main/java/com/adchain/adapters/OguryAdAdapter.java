@@ -8,29 +8,25 @@ import com.adchain.AdConfiguration;
 import com.adchain.config.RemoteConfigHelper;
 
 import io.presage.Presage;
-import io.presage.common.AdConfig;
-import io.presage.interstitial.PresageInterstitial;
-import io.presage.interstitial.PresageInterstitialCallback;
+import io.presage.ads.PresageInterstitial;
 
 /**
  * Created by Gust on 19.12.2017.
  */
 public class OguryAdAdapter extends AdChainAdapter {
     private final String apiKey;
-    private final String adUnitId;
     private PresageInterstitial presageInterstitial;
 
-    public static OguryAdAdapter configureAndCreate(final String remoteConfigEnableKey, String remoteConfigApiKeyKey, String remoteConfigAdUnitIdKey) {
-        String apiKey = RemoteConfigHelper.getConfigs().getString(remoteConfigApiKeyKey);
-        String adUnitId = RemoteConfigHelper.getConfigs().getString(remoteConfigAdUnitIdKey);
-        return checkAndCreate(remoteConfigEnableKey, adUnitId, apiKey);
+    public static OguryAdAdapter configureAndCreate(final String remoteConfigEnableKey, String remoteConfigApiKeyKey) {
+        String adUnitId = RemoteConfigHelper.getConfigs().getString(remoteConfigApiKeyKey);
+        return checkAndCreate(remoteConfigEnableKey, adUnitId);
     }
 
-    public static OguryAdAdapter checkAndCreate(final String remoteConfigEnableKey, final String adUnitId, String apiKey) {
+    public static OguryAdAdapter checkAndCreate(final String remoteConfigEnableKey, String apiKey) {
         if (TextUtils.isEmpty(apiKey)) {
             return null;
         }
-        return new OguryAdAdapter(apiKey, adUnitId, new AdConfiguration() {
+        return new OguryAdAdapter(apiKey, new AdConfiguration() {
             @Override
             public boolean showAd() {
                 return RemoteConfigHelper.areAdsEnabled() && RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
@@ -38,30 +34,29 @@ public class OguryAdAdapter extends AdChainAdapter {
         });
     }
 
-    public static OguryAdAdapter create(String apiKey, String adUnitId) {
+    public static OguryAdAdapter create(String apiKey) {
         if (TextUtils.isEmpty(apiKey))
             return null;
-        return new OguryAdAdapter(apiKey, adUnitId, null);
+        return new OguryAdAdapter(apiKey, null);
     }
 
-    private OguryAdAdapter(String apiKey, String adUnitId, AdConfiguration adConfiguration) {
+    private OguryAdAdapter(String apiKey, AdConfiguration adConfiguration) {
         super(adConfiguration);
         this.apiKey = apiKey;
-        this.adUnitId = adUnitId;
     }
 
     @Override
     public void init() {
-        Presage.getInstance().start(this.apiKey, getActivity());
-        AdConfig adConfig = new AdConfig(this.adUnitId);
-        presageInterstitial = new PresageInterstitial(getActivity(), adConfig);
-        presageInterstitial.setInterstitialCallback(new Handler());
+        Presage.getInstance().setContext(getActivity());
+        Presage.getInstance().start();
+        presageInterstitial = new PresageInterstitial(getActivity(), this.apiKey);
+        presageInterstitial.setPresageInterstitialCallback(new Handler());
         presageInterstitial.load();
     }
 
     @Override
     public boolean isAdLoaded() {
-        return presageInterstitial.isLoaded();
+        return presageInterstitial.canShow();
     }
 
     @Override
@@ -72,11 +67,12 @@ public class OguryAdAdapter extends AdChainAdapter {
 
     @Override
     public void destroy() {
+        presageInterstitial.destroy();
         presageInterstitial = null;
     }
 
 
-    private class Handler implements PresageInterstitialCallback {
+    private class Handler implements PresageInterstitial.PresageInterstitialCallback {
         @Override
         public void onAdAvailable() {
             logv("onAdAvailable");
@@ -92,12 +88,6 @@ public class OguryAdAdapter extends AdChainAdapter {
         public void onAdLoaded() {
             logv("onAdLoaded");
             loaded();
-        }
-
-        @Override
-        public void onAdNotLoaded() {
-            logv("onAdNotLoaded");
-            error("onAdNotLoaded");
         }
 
         @Override
