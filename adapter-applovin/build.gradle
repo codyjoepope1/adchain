@@ -31,7 +31,8 @@ dependencies {
 
     api project(path: ':core')
 
-    api 'com.applovin:applovin-sdk:7.6.2'
+    api 'com.applovin:applovin-sdk:8.1.0'
+    api 'com.google.android.gms:play-services-ads:15.0.1'
 }
 
 task sourcesJar(type: Jar) {

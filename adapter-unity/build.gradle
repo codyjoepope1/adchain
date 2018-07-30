@@ -31,7 +31,7 @@ dependencies {
 
     api project(path: ':core')
 
-    api 'com.unity3d.ads:unity-ads:2.2.0'
+    api 'com.unity3d.ads:unity-ads:2.2.1'
 
 }
 

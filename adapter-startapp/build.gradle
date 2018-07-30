@@ -26,13 +26,13 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:appcompat-v7:27.1.1'
     api 'com.android.support:support-media-compat:27.1.1'
+    api 'com.android.support:appcompat-v7:27.1.1'
     api 'com.android.support:support-v4:27.1.1'
     api project(path: ':core')
 
-    //ogury
-    api(name: 'presage-moat-3.0.22-moat-3.0.13', ext: 'aar')
+    //startapp
+    api 'com.startapp:inapp-sdk:3.9.3'
 }
 
 task sourcesJar(type: Jar) {

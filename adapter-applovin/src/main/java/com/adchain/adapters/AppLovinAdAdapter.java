@@ -1,0 +1,206 @@
+package com.adchain.adapters;
+
+
+import android.content.Context;
+import android.os.Bundle;
+import android.text.TextUtils;
+
+import com.adchain.AdChainAdapter;
+import com.adchain.AdConfiguration;
+import com.adchain.config.RemoteConfigHelper;
+import com.applovin.adview.AppLovinInterstitialAd;
+import com.applovin.adview.AppLovinInterstitialAdDialog;
+import com.applovin.sdk.AppLovinAd;
+import com.applovin.sdk.AppLovinAdClickListener;
+import com.applovin.sdk.AppLovinAdDisplayListener;
+import com.applovin.sdk.AppLovinAdLoadListener;
+import com.applovin.sdk.AppLovinAdVideoPlaybackListener;
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkSettings;
+import com.google.android.gms.ads.mediation.MediationAdRequest;
+import com.google.android.gms.ads.mediation.MediationInterstitialAdapter;
+import com.google.android.gms.ads.mediation.MediationInterstitialListener;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
+
+public class AppLovinAdAdapter extends AdChainAdapter implements MediationInterstitialAdapter, AppLovinAdLoadListener, AppLovinAdDisplayListener, AppLovinAdClickListener, AppLovinAdVideoPlaybackListener {
+    private static final Map<String, Queue<AppLovinAd>> GLOBAL_INTERSTITIAL_ADS = new HashMap<>();
+    private static final Object GLOBAL_INTERSTITIAL_ADS_LOCK = new Object();
+    private final String sdkKey;
+    private final String zoneId;
+    private AppLovinSdk sdk;
+
+    public static AppLovinAdAdapter configureAndCreate(final String remoteConfigEnableKey, String remoteConfigSdkKeyKey, String remoteConfigZoneIdKey) {
+        String sdkKey = RemoteConfigHelper.getConfigs().getString(remoteConfigSdkKeyKey);
+        String zoneId = RemoteConfigHelper.getConfigs().getString(remoteConfigZoneIdKey);
+        return checkAndCreate(remoteConfigEnableKey, sdkKey, zoneId);
+    }
+
+    public static AppLovinAdAdapter checkAndCreate(final String remoteConfigEnableKey, String sdkKey, String zoneId) {
+        if (TextUtils.isEmpty(sdkKey) || TextUtils.isEmpty(zoneId)) {
+            return null;
+        }
+        return new AppLovinAdAdapter(sdkKey, zoneId, new AdConfiguration() {
+            @Override
+            public boolean showAd() {
+                return RemoteConfigHelper.areAdsEnabled() && RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+            }
+        });
+    }
+
+    public static AppLovinAdAdapter create(String sdkKey, String zoneId) {
+        if (TextUtils.isEmpty(sdkKey) || TextUtils.isEmpty(zoneId))
+            return null;
+        return new AppLovinAdAdapter(sdkKey, zoneId, null);
+    }
+
+    private AppLovinAdAdapter(String sdkKey, String zoneId, AdConfiguration adConfiguration) {
+        super(adConfiguration);
+        this.sdkKey = sdkKey;
+        this.zoneId = zoneId;
+    }
+
+
+    @Override
+    public void init() {
+        if (sdk == null) {
+            sdk = AppLovinSdk.getInstance(sdkKey, new AppLovinSdkSettings(), getActivity());
+        }
+        sdk.getAdService().loadNextAdForZoneId(zoneId, this);
+    }
+
+
+    @Override
+    public boolean isAdLoaded() {
+        synchronized (GLOBAL_INTERSTITIAL_ADS_LOCK) {
+            final Queue<AppLovinAd> preloadedAds = GLOBAL_INTERSTITIAL_ADS.get(zoneId);
+            if (preloadedAds != null && !preloadedAds.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void showAd() {
+        final AppLovinAd preloadedAd = dequeueAd(zoneId);
+        if (preloadedAd != null) {
+            final AppLovinInterstitialAdDialog interstitialAd = AppLovinInterstitialAd.create(sdk, getActivity());
+            interstitialAd.setAdDisplayListener(this);
+            interstitialAd.setAdClickListener(this);
+            interstitialAd.setAdVideoPlaybackListener(this);
+            interstitialAd.showAndRender(preloadedAd);
+        } else {
+            super.error("Failed to show an AppLovin interstitial before one was loaded");
+        }
+    }
+
+
+    @Override
+    public void destroy() {
+        sdk = null;
+    }
+
+    @Override
+    public void adReceived(AppLovinAd appLovinAd) {
+        logv("adReceived");
+        enqueueAd(appLovinAd, zoneId);
+        super.loaded();
+    }
+
+    @Override
+    public void failedToReceiveAd(int i) {
+        logv("failedToReceiveAd");
+        super.error(":" + i);
+    }
+
+    @Override
+    public void requestInterstitialAd(Context context, MediationInterstitialListener mediationInterstitialListener, Bundle bundle, MediationAdRequest mediationAdRequest, Bundle bundle1) {
+        logv("requestInterstitialAd");
+    }
+
+    @Override
+    public void showInterstitial() {
+        logv("showInterstitial");
+
+    }
+
+    @Override
+    public void onDestroy() {
+        logv("onDestroy");
+    }
+
+    @Override
+    public void onPause() {
+        logv("onPause");
+
+    }
+
+    @Override
+    public void onResume() {
+        logv("onResume");
+
+    }
+
+    @Override
+    public void adDisplayed(AppLovinAd appLovinAd) {
+        logv("adDisplayed");
+        super.closed();
+
+    }
+
+    @Override
+    public void adHidden(AppLovinAd appLovinAd) {
+        logv("adHidden");
+        super.closed();
+
+    }
+
+    @Override
+    public void adClicked(AppLovinAd appLovinAd) {
+        logv("adClicked");
+
+    }
+
+    @Override
+    public void videoPlaybackBegan(AppLovinAd appLovinAd) {
+        logv("videoPlaybackBegan");
+
+    }
+
+    @Override
+    public void videoPlaybackEnded(AppLovinAd appLovinAd, double v, boolean b) {
+        logv("videoPlaybackEnded");
+        super.closed();
+    }
+
+
+    private static AppLovinAd dequeueAd(final String zoneId) {
+        synchronized (GLOBAL_INTERSTITIAL_ADS_LOCK) {
+            AppLovinAd preloadedAd = null;
+
+            final Queue<AppLovinAd> preloadedAds = GLOBAL_INTERSTITIAL_ADS.get(zoneId);
+            if (preloadedAds != null && !preloadedAds.isEmpty()) {
+                preloadedAd = preloadedAds.poll();
+            }
+
+            return preloadedAd;
+        }
+    }
+
+    private static void enqueueAd(final AppLovinAd ad, final String zoneId) {
+        synchronized (GLOBAL_INTERSTITIAL_ADS_LOCK) {
+            Queue<AppLovinAd> preloadedAds = GLOBAL_INTERSTITIAL_ADS.get(zoneId);
+            if (preloadedAds == null) {
+                preloadedAds = new LinkedList<>();
+                GLOBAL_INTERSTITIAL_ADS.put(zoneId, preloadedAds);
+            }
+
+            preloadedAds.offer(ad);
+        }
+    }
+}

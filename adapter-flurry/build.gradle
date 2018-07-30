@@ -32,8 +32,8 @@ dependencies {
     api project(path: ':core')
 
     //Flurry
-    api 'com.flurry.android:analytics:10.0.0@aar'
-    api 'com.flurry.android:ads:10.0.0@aar'
+    api 'com.flurry.android:analytics:11.1.1@aar'
+    api 'com.flurry.android:ads:11.1.1@aar'
 }
 
 task sourcesJar(type: Jar) {
