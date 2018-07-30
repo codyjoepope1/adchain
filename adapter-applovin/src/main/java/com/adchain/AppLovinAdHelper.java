@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import com.adchain.config.RemoteConfigHelper;
 import com.applovin.adview.AppLovinAdView;
 import com.applovin.sdk.AppLovinAd;
-import com.applovin.sdk.AppLovinAdDisplayListener;
 import com.applovin.sdk.AppLovinAdLoadListener;
 import com.applovin.sdk.AppLovinAdSize;
 import com.applovin.sdk.AppLovinSdk;
