@@ -32,7 +32,7 @@ dependencies {
     api project(path: ':core')
 
     //ogury
-    api(name: 'presage-moat-3.0.22-moat-3.0.13', ext: 'aar')
+    implementation(name: 'presage-moat-3.0.22-moat-3.0.13', ext: 'aar')
 }
 
 task sourcesJar(type: Jar) {
