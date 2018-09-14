@@ -24,6 +24,7 @@ public class FacebookAdHelper {
 
     public static com.facebook.ads.AdView checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey, String facebokBannerId) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         return loadBanner(context, adContainer, enable, facebokBannerId);
     }
 

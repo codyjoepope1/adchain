@@ -28,6 +28,7 @@ public class AppLovinAdHelper {
 
     public static AppLovinAdView checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         return loadBanner(context, adContainer, enable);
     }
 

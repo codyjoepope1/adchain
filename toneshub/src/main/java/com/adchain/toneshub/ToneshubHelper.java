@@ -23,6 +23,7 @@ public class ToneshubHelper {
 
     public static void checkAndBindToneshubButton(final Activity activity, final String toneshubId, Button button, String remoteConfigEnableKey) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         bindToneshubButton(activity, toneshubId, button, enable);
 
     }

@@ -19,6 +19,7 @@ public class FlurryAdHelper {
 
     public static FlurryAdBanner checkAndLoadBanner(Context context, LinearLayout mBanner, String remoteConfigEnableKey, String mAdSpaceName) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         return loadBanner(context, mAdSpaceName, mBanner, enable);
     }
 

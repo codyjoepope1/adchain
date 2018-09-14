@@ -16,6 +16,7 @@ public class StartappAdHelper {
 
     public static Banner checkAndLoadBanner(Activity activity, LinearLayout mainLayout, String remoteConfigEnableKey) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         return loadBanner(activity, mainLayout, enable);
     }
 

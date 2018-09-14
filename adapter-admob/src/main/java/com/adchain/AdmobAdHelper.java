@@ -26,6 +26,7 @@ public class AdmobAdHelper {
             * */
     public static void checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey, String adUnitId) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         loadBanner(context, adContainer, adUnitId, enable);
     }
 

@@ -23,6 +23,7 @@ public class AmazonAdHelper {
 
     public static AdLayout checkAndLoadBanner(Context context, LinearLayout adContainer, String remoteConfigEnableKey, String appKey) {
         boolean enable = RemoteConfigHelper.getConfigs().getBoolean(remoteConfigEnableKey);
+        enable = enable && RemoteConfigHelper.areAdsEnabled();
         return loadBanner(context, adContainer, enable, appKey);
     }
 
