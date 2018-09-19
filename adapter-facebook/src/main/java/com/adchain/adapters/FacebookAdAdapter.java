@@ -85,8 +85,10 @@ public class FacebookAdAdapter extends AdChainAdapter implements InterstitialAdL
 
     @Override
     public void destroy() {
-        ad.destroy();
-        ad = null;
+        if (ad != null) {
+            ad.destroy();
+            ad = null;
+        }
     }
 
     @Override

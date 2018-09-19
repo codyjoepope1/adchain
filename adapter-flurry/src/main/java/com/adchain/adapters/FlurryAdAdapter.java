@@ -64,8 +64,10 @@ public class FlurryAdAdapter extends AdChainAdapter implements FlurryAdInterstit
 
     @Override
     public void destroy() {
-        mFlurryAdInterstitial.destroy();
-        mFlurryAdInterstitial = null;
+        if (mFlurryAdInterstitial != null) {
+            mFlurryAdInterstitial.destroy();
+            mFlurryAdInterstitial = null;
+        }
     }
 
 

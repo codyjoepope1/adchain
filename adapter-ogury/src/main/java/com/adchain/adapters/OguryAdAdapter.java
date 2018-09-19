@@ -67,8 +67,10 @@ public class OguryAdAdapter extends AdChainAdapter {
 
     @Override
     public void destroy() {
-        presageInterstitial.destroy();
-        presageInterstitial = null;
+        if (presageInterstitial != null) {
+            presageInterstitial.destroy();
+            presageInterstitial = null;
+        }
     }
 
 
