@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
+import android.view.View;
 
 import com.adchain.utils.AppExecutors;
 
@@ -18,7 +19,7 @@ import com.adchain.utils.AppExecutors;
 public class AdChain {
     String TAG = "AdChain";
 
-    private Object startChainLock = new Object();
+    private final Object startChainLock = new Object();
     AppExecutors appExecutors = new AppExecutors();
 
     private Activity context;
@@ -41,6 +42,8 @@ public class AdChain {
     private Runnable timeoutRunnable;
     private Handler timeoutTimer;
     private long timeout;
+
+    private View clickView;
 
     AdChain(Activity context) {
         this.context = context;
@@ -167,6 +170,12 @@ public class AdChain {
         }
     }
 
+    void setClickViewAsVisible() {
+        if (clickView != null) {
+            clickView.setVisibility(View.VISIBLE);
+            clickView = null; // set as visible just one time
+        }
+    }
 
     Activity getActivity() {
         return this.context;
@@ -205,6 +214,10 @@ public class AdChain {
 
     void setIntent(Intent intent) {
         this.intent = intent;
+    }
+
+    public void setClickView(View clickView) {
+        this.clickView = clickView;
     }
 
     void setLoggingEnabled(boolean loggingEnabled) {
@@ -298,6 +311,7 @@ public class AdChain {
                 @Override
                 public void run() {
                     adChain.timeout();
+                    setClickViewAsVisible();
                     startChain();
                 }
             };

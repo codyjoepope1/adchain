@@ -136,7 +136,7 @@ public final class AdChainBuilder {
      * set views clickListener and shows ads when clicked
      */
     public AdChainBuilder showOnClick(int triggerViewId) {
-        return showOnClick(triggerViewId, 2000L);
+        return showOnClick(triggerViewId, -1L);
     }
 
     /**
@@ -157,12 +157,15 @@ public final class AdChainBuilder {
         });
 
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                view.setVisibility(View.VISIBLE);
-            }
-        }, enableDelay);
+        adc.setClickView(view);
+        if (enableDelay >= 0) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    view.setVisibility(View.VISIBLE);
+                }
+            }, enableDelay);
+        }
         return this;
     }
 

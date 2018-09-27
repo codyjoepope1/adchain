@@ -133,6 +133,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
 
         this.loaded = true;
 
+        rootChain.setClickViewAsVisible();
         rootChain.appExecutors.networkIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -153,6 +154,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
             return;
         this.loaded = false;
 
+        rootChain.setClickViewAsVisible();
         rootChain.appExecutors.networkIO().execute(new Runnable() {
             @Override
             public void run() {
