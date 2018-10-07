@@ -100,6 +100,7 @@ public class StartappAdAdapter extends AdChainAdapter implements VideoListener, 
     @Override
     public void adClicked(Ad ad) {
         logv("adClicked");
+        clicked();
     }
 
     @Override

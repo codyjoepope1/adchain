@@ -125,6 +125,10 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         }
     }
 
+    @MainThread
+    public final void clicked() {
+        rootChain.adClicked(getClass());
+    }
 
     @MainThread
     public final void loaded() {
@@ -133,6 +137,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
 
         this.loaded = true;
 
+        rootChain.adLoaded(getClass());
         rootChain.setClickViewAsVisible();
         rootChain.appExecutors.networkIO().execute(new Runnable() {
             @Override
@@ -192,15 +197,15 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         this.rootChain = rootChain;
     }
 
-    public void log(String message) {
+    public final void log(String message) {
         rootChain.log(getClass().getSimpleName() + getExtra() + " " + message);
     }
 
-    public void loge(String message) {
+    public final void loge(String message) {
         rootChain.loge(getClass().getSimpleName() + getExtra() + " " + message);
     }
 
-    public void logv(String message) {
+    public final void logv(String message) {
         rootChain.logv(getClass().getSimpleName() + getExtra() + " " + message);
     }
 
@@ -211,15 +216,15 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
         return "";
     }
 
-    public Activity getActivity() {
+    public final Activity getActivity() {
         return rootChain.getActivity();
     }
 
-    protected boolean isLoggingEnabled() {
+    protected final boolean isLoggingEnabled() {
         return rootChain.isLoggingEnabled();
     }
 
-    protected boolean isShowTestAds() {
+    protected final boolean isShowTestAds() {
         return rootChain.isShowTestAds();
     }
 

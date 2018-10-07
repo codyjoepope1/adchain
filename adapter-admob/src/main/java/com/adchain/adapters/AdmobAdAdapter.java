@@ -89,6 +89,11 @@ public class AdmobAdAdapter extends AdChainAdapter {
             error("code:" + errorCode);
         }
 
+        @Override
+        public void onAdClicked() {
+            logv("onAdClicked");
+            clicked();
+        }
     }
 
 }

@@ -105,7 +105,8 @@ public class UnityAdAdapter extends AdChainAdapter implements IUnityAdsListener,
 
     @Override
     public void onUnityAdsClick(String placementId) {
-
+        logv("onUnityAdsClick");
+        clicked();
     }
 
     @Override

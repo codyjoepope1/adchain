@@ -170,7 +170,7 @@ public class AdChain {
         }
     }
 
-    void setClickViewAsVisible() {
+    protected void setClickViewAsVisible() {
         if (clickView != null) {
             clickView.setVisibility(View.VISIBLE);
             clickView = null; // set as visible just one time
@@ -316,6 +316,18 @@ public class AdChain {
                 }
             };
             timeoutTimer.postDelayed(timeoutRunnable, this.timeout);
+        }
+    }
+
+    public void adLoaded(Class<? extends AdChainAdapter> aClass) {
+        if (adChainListener != null) {
+            adChainListener.adLoaded(aClass);
+        }
+    }
+
+    public void adClicked(Class<? extends AdChainAdapter> aClass) {
+        if (adChainListener != null) {
+            adChainListener.adClicked(aClass);
         }
     }
 }

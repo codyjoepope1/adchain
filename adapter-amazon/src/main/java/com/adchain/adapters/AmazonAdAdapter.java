@@ -97,6 +97,7 @@ public class AmazonAdAdapter extends AdChainAdapter implements AdListener {
     @Override
     public void onAdExpanded(Ad ad) {
         logv("onAdExpanded");
+        clicked();
     }
 
     @Override
@@ -104,4 +105,5 @@ public class AmazonAdAdapter extends AdChainAdapter implements AdListener {
         logv("onAdCollapsed");
     }
 
+    // todo click event not exist ??
 }

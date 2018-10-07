@@ -107,6 +107,7 @@ public class OguryAdAdapter extends AdChainAdapter {
         @Override
         public void onAdDisplayed() {
             logv("onAdDisplayed");
+            clicked();
         }
     }
 }

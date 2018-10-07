@@ -117,6 +117,7 @@ public class FacebookAdAdapter extends AdChainAdapter implements InterstitialAdL
     @Override
     public void onAdClicked(Ad ad) {
         logv("onAdClicked");
+        clicked();
     }
 
     @Override

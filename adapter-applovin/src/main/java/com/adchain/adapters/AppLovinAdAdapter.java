@@ -159,7 +159,7 @@ public class AppLovinAdAdapter extends AdChainAdapter implements MediationInters
     @Override
     public void adClicked(AppLovinAd appLovinAd) {
         logv("adClicked");
-
+        clicked();
     }
 
     @Override

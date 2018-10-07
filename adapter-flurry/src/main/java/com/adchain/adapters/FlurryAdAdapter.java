@@ -97,6 +97,7 @@ public class FlurryAdAdapter extends AdChainAdapter implements FlurryAdInterstit
     @Override
     public void onClicked(FlurryAdInterstitial flurryAdInterstitial) {
         logv("onClicked");
+        clicked();
     }
 
     @Override
