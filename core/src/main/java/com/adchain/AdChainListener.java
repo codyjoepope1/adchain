@@ -8,11 +8,11 @@ import android.support.annotation.MainThread;
 public class AdChainListener {
 
     @MainThread
-    void adCompleted(int order, int total, boolean isLastAd){}
+    public void adCompleted(int order, int total, boolean isLastAd){}
 
     @MainThread
-    void adClicked(Class<? extends AdChainAdapter> type){}
+    public void adClicked(Class<? extends AdChainAdapter> type){}
 
     @MainThread
-    void adLoaded(Class<? extends AdChainAdapter> type){}
+    public void adLoaded(Class<? extends AdChainAdapter> type){}
 }
