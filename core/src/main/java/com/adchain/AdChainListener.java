@@ -7,12 +7,16 @@ import android.support.annotation.MainThread;
  */
 public class AdChainListener {
 
-    @MainThread
-    public void adCompleted(int order, int total, boolean isLastAd){}
+    public enum ComplationType {
+        NULL_CHAIN, TIMEOUT, CLOSED, ERROR
+    }
 
     @MainThread
-    public void adClicked(Class<? extends AdChainAdapter> type){}
+    public void adCompleted(Class<? extends AdChainAdapter> adapter, ComplationType type, int order, int total, boolean isLastAd){}
 
     @MainThread
-    public void adLoaded(Class<? extends AdChainAdapter> type){}
+    public void adClicked(Class<? extends AdChainAdapter> adapter){}
+
+    @MainThread
+    public void adLoaded(Class<? extends AdChainAdapter> adapter){}
 }

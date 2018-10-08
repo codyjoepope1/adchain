@@ -68,7 +68,7 @@ public class AdChain {
                 if (adChain == null) {
                     startActivity();
                     finishActivity();
-                    triggerAdChainListener();
+                    triggerAdChainListener(null, AdChainListener.ComplationType.NULL_CHAIN);
                     return;
                 }
 
@@ -113,12 +113,12 @@ public class AdChain {
     }
 
     @WorkerThread
-    void triggerAdChainListener() {
+    void triggerAdChainListener(final Class<? extends AdChainAdapter> aClass, final AdChainListener.ComplationType type) {
         if (this.adChainListener != null) {
             appExecutors.mainThread().execute(new Runnable() {
                 @Override
                 public void run() {
-                    AdChain.this.adChainListener.adCompleted(displayedAdCount, totalAdCount, isLastAd());
+                    AdChain.this.adChainListener.adCompleted(aClass, type, displayedAdCount, totalAdCount, isLastAd());
                 }
             });
         }
@@ -319,15 +319,25 @@ public class AdChain {
         }
     }
 
-    public void adLoaded(Class<? extends AdChainAdapter> aClass) {
+    public void adLoaded(final Class<? extends AdChainAdapter> aClass) {
         if (adChainListener != null) {
-            adChainListener.adLoaded(aClass);
+            appExecutors.mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    adChainListener.adLoaded(aClass);
+                }
+            });
         }
     }
 
-    public void adClicked(Class<? extends AdChainAdapter> aClass) {
+    public void adClicked(final Class<? extends AdChainAdapter> aClass) {
         if (adChainListener != null) {
-            adChainListener.adClicked(aClass);
+            appExecutors.mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    adChainListener.adClicked(aClass);
+                }
+            });
         }
     }
 }

@@ -75,7 +75,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                     this.rootChain.increaseDisplayedAdCount();
                     if (realTimeout) {
                         loge("timeout. Ad is cancelled."); // real timeout
-                        this.rootChain.triggerAdChainListener();
+                        this.rootChain.triggerAdChainListener(getClass(), AdChainListener.ComplationType.TIMEOUT);
                     }
                     this.rootChain.startChain();
                 } else
@@ -168,7 +168,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                 timedOut = true;
                 isClosed = true;
 //        this.rootChain.increaseDisplayedAdCount();
-                rootChain.triggerAdChainListener();
+                rootChain.triggerAdChainListener(getClass(), AdChainListener.ComplationType.ERROR);
                 rootChain.startChain();
             }
         });
@@ -187,7 +187,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
                 log("closed");
                 isClosed = true;
 
-                rootChain.triggerAdChainListener();
+                rootChain.triggerAdChainListener(getClass(), AdChainListener.ComplationType.CLOSED);
                 rootChain.startChain();
             }
         });
