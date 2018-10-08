@@ -49,7 +49,7 @@ public abstract class AdChainAdapter implements IAdChain, IAdCallback {
 
             if (loaded) {
                 log("displaying");
-                this.rootChain.increaseDisplayedAdCount();
+                this.rootChain.increaseDisplayedAdCount(true);
                 isDisplayed = true;
                 rootChain.appExecutors.mainThread().execute(new Runnable() {
                     @Override

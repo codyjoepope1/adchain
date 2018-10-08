@@ -132,8 +132,11 @@ public class AdChain {
     }
 
     void increaseDisplayedAdCount() {
+        increaseDisplayedAdCount(false);
+    }
+    void increaseDisplayedAdCount(boolean checkAndStartActivity) {
         this.displayedAdCount++;
-        if (!hasNextStepBarrier() && isLastAd()) {
+        if (checkAndStartActivity && !hasNextStepBarrier() && isLastAd()) {
             startActivity();
         }
         log("Ad position: " + displayedAdCount + "/" + totalAdCount);
