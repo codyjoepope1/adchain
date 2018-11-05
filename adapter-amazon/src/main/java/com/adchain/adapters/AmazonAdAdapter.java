@@ -51,7 +51,6 @@ public class AmazonAdAdapter extends AdChainAdapter implements AdListener {
     @Override
     public void init() {
         AdRegistration.registerApp(getActivity());
-        AdRegistration.enableLogging(isLoggingEnabled());
         AdRegistration.enableTesting(isShowTestAds());
         AdRegistration.setAppKey(amazonAppKey);
         ad = new InterstitialAd(getActivity());
