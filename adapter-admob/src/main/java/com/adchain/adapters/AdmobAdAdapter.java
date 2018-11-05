@@ -58,7 +58,7 @@ public class AdmobAdAdapter extends AdChainAdapter {
 
     @Override
     public boolean isAdLoaded() {
-        return ad.isLoaded();
+        return ad != null && ad.isLoaded();
     }
 
     @Override

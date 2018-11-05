@@ -18,8 +18,6 @@ public final class AdChainBuilder {
 
     public AdChainBuilder(Activity context) {
         adc = new AdChain(context);
-        boolean debug = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
-        setLogging(debug);
     }
 
     public AdChain build() {
@@ -41,16 +39,6 @@ public final class AdChainBuilder {
         return adc;
     }
 
-    /**
-     * logging feature of library. default value is enabled for debug, disabled for prod.
-     */
-    public AdChainBuilder setLogging(boolean enable) {
-        if (adc.getAdChain() != null) {
-            Log.e(adc.TAG, "call setLogging function before add()");
-        }
-        adc.setLoggingEnabled(enable);
-        return this;
-    }
 
     /**
      * request test ads from platforms if available feature.

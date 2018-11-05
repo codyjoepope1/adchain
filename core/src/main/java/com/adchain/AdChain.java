@@ -32,7 +32,6 @@ public class AdChain {
 
     private AdChainListener adChainListener;
 
-    private boolean loggingEnabled;
     private boolean showTestAds;
 
     private int totalAdCount;
@@ -99,8 +98,7 @@ public class AdChain {
     }
 
     void log(String message) {
-        if (loggingEnabled)
-            Log.d(TAG, message);
+        Log.d(TAG, message);
     }
 
     void loge(String message) {
@@ -108,8 +106,7 @@ public class AdChain {
     }
 
     void logv(String message) {
-        if (loggingEnabled)
-            Log.v(TAG, message);
+        Log.v(TAG, message);
     }
 
     @WorkerThread
@@ -136,7 +133,7 @@ public class AdChain {
     }
     void increaseDisplayedAdCount(boolean checkAndStartActivity) {
         this.displayedAdCount++;
-        if (checkAndStartActivity && !hasNextStepBarrier() && isLastAd()) {
+        if (checkAndStartActivity && !hasNextStepBarrier() && isLastAd()) { // todo set flag for step over
             startActivity();
         }
         log("Ad position: " + displayedAdCount + "/" + totalAdCount);
@@ -223,13 +220,6 @@ public class AdChain {
         this.clickView = clickView;
     }
 
-    void setLoggingEnabled(boolean loggingEnabled) {
-        this.loggingEnabled = loggingEnabled;
-    }
-
-    boolean isLoggingEnabled() {
-        return this.loggingEnabled;
-    }
     boolean isShowTestAds() {
         return this.showTestAds;
     }
